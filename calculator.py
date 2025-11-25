@@ -22,6 +22,12 @@ class Calculator:
     def power(self, a, b):
         """Raise a to the power of b"""
         return a ** b
+    
+    def modulo(self, a, b):
+        """Return the remainder of a divided by b"""
+        if b == 0:
+            raise ValueError("Cannot perform modulo by zero")
+        return a % b
 
 def main():
     """CLI interface for the calculator"""
@@ -29,7 +35,7 @@ def main():
     print("=" * 40)
     print("Simple Calculator CLI")
     print("=" * 40)
-    print("Operations: add, subtract, multiply, divide, power, quit")
+    print("Operations: add, subtract, multiply, divide, power, modulo, quit")
     
     while True:
         operation = input("\nEnter operation: ").lower().strip()
@@ -38,7 +44,7 @@ def main():
             print("Goodbye!")
             break
         
-        if operation not in ['add', 'subtract', 'multiply', 'divide', 'power']:
+        if operation not in ['add', 'subtract', 'multiply', 'divide', 'power', 'modulo']:
             print("Invalid operation. Please try again.")
             continue
         
@@ -56,6 +62,8 @@ def main():
                 result = calc.divide(a, b)
             elif operation == 'power':
                 result = calc.power(a, b)
+            elif operation == 'modulo':
+                result = calc.modulo(a, b)
             
             print(f"Result: {result}")
         

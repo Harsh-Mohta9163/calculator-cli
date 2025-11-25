@@ -35,3 +35,15 @@ def test_power():
     assert calc.power(2, 3) == 8
     assert calc.power(5, 2) == 25
     assert calc.power(10, 0) == 1
+
+def test_modulo():
+    calc = Calculator()
+    assert calc.modulo(10, 3) == 1
+    assert calc.modulo(15, 4) == 3
+    assert calc.modulo(20, 5) == 0
+    assert calc.modulo(7, 2) == 1
+
+def test_modulo_by_zero():
+    calc = Calculator()
+    with pytest.raises(ValueError, match="Cannot perform modulo by zero"):
+        calc.modulo(10, 0)
