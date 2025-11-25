@@ -528,16 +528,6 @@ Finished: SUCCESS
 
 </details>
 
-
-### Setup Jenkins
-
-1. Update the `IMAGE` environment variable in Jenkinsfile with your Docker Hub username
-2. Update the repository URL in the Checkout stage
-3. Configure credentials in Jenkins:
-   - `github-creds` for GitHub access
-   - `dockerhub-creds` for Docker Hub
-4. Create a new Pipeline job in Jenkins pointing to your repository
-
 ## Project Structure
 
 ```
