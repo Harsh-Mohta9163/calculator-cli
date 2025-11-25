@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM',
-                  branches: [[name: '*/main']],
+                  branches: [[name: '*/master']],
                   userRemoteConfigs: [[
                     url: 'https://github.com/Harsh-Mohta9163/calculator-cli.git',
                     credentialsId: 'github-creds'
