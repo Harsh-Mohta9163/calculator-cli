@@ -549,7 +549,3 @@ calculator-cli/
 ├── Jenkinsfile          # Jenkins pipeline configuration
 └── README.md            # This file
 ```
-
-## License
-
-MIT License
