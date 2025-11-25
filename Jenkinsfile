@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE = "harsh9163/calculator-cli:jenkins"
+        IMAGE = "harsh9163/imt2023106:jenkins"
         VENV = ".venv"
     }
 
@@ -22,26 +22,26 @@ pipeline {
 
         stage('Create Virtual Environment') {
             steps {
-                sh '$PYTHON -m venv $VENV'
-                sh '$VENV/bin/pip install --upgrade pip'
+                bat 'python -m venv %VENV%'
+                bat '%VENV%\\Scripts\\python.exe -m pip install --upgrade pip'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh '$VENV/bin/pip install -r requirements.txt'
+                bat '%VENV%\\Scripts\\pip install -r requirements.txt'
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh '$VENV/bin/pytest -v'
+                bat '%VENV%\\Scripts\\pytest -v'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $IMAGE .'
+                bat 'docker build -t %IMAGE% .'
             }
         }
 
@@ -50,9 +50,9 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds',
                                                   usernameVariable: 'USER',
                                                   passwordVariable: 'PASS')]) {
-                    sh '''
-                      echo $PASS | docker login -u $USER --password-stdin
-                      docker push $IMAGE
+                    bat '''
+                      echo %PASS% | docker login -u %USER% --password-stdin
+                      docker push %IMAGE%
                     '''
                 }
             }
@@ -60,11 +60,11 @@ pipeline {
 
         stage('Deploy Container') {
             steps {
-                sh '''
-                  docker pull $IMAGE
-                  docker stop calculator-cli || true
-                  docker rm calculator-cli || true
-                  docker run -d --name calculator-cli $IMAGE
+                bat '''
+                  docker pull %IMAGE%
+                  docker stop calculator-cli || exit 0
+                  docker rm calculator-cli || exit 0
+                  docker run -d --name calculator-cli %IMAGE%
                 '''
             }
         }
