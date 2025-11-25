@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE = "your-dockerhub-username/calculator-cli:jenkins"
+        IMAGE = "harsh9163/calculator-cli:jenkins"
         VENV = ".venv"
         PYTHON = "/usr/bin/python3" 
     }
@@ -14,7 +14,7 @@ pipeline {
                 checkout([$class: 'GitSCM',
                   branches: [[name: '*/main']],
                   userRemoteConfigs: [[
-                    url: 'https://github.com/your-username/calculator-cli.git',
+                    url: 'https://github.com/Harsh-Mohta9163/calculator-cli.git',
                     credentialsId: 'github-creds'
                   ]]
                 ])
